@@ -3,7 +3,3 @@
     <%= render partial: "form", locals: { form: form } %>
   <% end %>
 <% end %>
-
-<%= turbo_stream.prepend "messages" do %>
-  <%= render @message %>
-<% end %>
