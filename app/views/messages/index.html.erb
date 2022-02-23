@@ -1,0 +1,30 @@
+<div class="grow">
+  <h1 class="font-bold text-4xl">Messages#index</h1>
+  <p>Find me in app/views/messages/index.html.erb</p>
+
+  <div id="new_message" class="mb-5">
+    <%= form_with model: @message do |form| %>
+      <% if form.object.errors.any? %>
+        <div class="bg-red-500 text-white p-3 mb-5">
+          <strong class="font-bold block">Errors:</strong>
+          <ul>
+            <% form.object.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="bg-slate-200 rounded p-3">
+        <div class="mb-3">
+          <%= form.text_area :body, class: "w-full", placeholder: "message" %>
+        </div>
+        <%= form.submit "Send", class: "bg-blue-400 text-white w-full rounded px-5 py-2" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="messages">
+    <%= render @messages %>
+  </div>
+</div>
