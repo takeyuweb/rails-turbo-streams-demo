@@ -6,11 +6,14 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(params.require(:message).permit(:body))
-    if @message.save
-      redirect_to messages_url
-    else
-      @messages = Message.order(created_at: :desc)
-      render action: :index, status: :unprocessable_entity
+    respond_to do |format|
+      if @message.save
+        format.html { redirect_to messages_url }
+        format.turbo_stream
+      else
+        @messages = Message.order(created_at: :desc)
+        format.html { render action: :index, status: :unprocessable_entity }
+      end
     end
   end
 end

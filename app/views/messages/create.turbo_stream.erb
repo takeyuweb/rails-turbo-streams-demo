@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "new_message" do %>
+  <%= form_with model: Message.new do |form| %>
+    <%= render partial: "form", locals: { form: form } %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.prepend "messages" do %>
+  <%= render @message %>
+<% end %>
